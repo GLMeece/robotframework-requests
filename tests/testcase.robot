@@ -60,11 +60,11 @@ Get With Digest Auth
     Should Be Equal As Strings    ${resp.json()['authenticated']}    True
 
 Post Request With URL Params
-	[Tags]  post
-	Create Session  httpbin  http://httpbin.org
-	&{params}=   Create Dictionary   key=value     key2=value2
-	${resp}=  Post Request  httpbin  /post		params=${params}
-	Should Be Equal As Strings  ${resp.status_code}  200
+    [Tags]  post
+    Create Session  httpbin  http://httpbin.org
+    &{params}=   Create Dictionary   key=value     key2=value2
+    ${resp}=  Post Request  httpbin  /post		params=${params}
+    Should Be Equal As Strings  ${resp.status_code}  200
 
 Post Request With No Data
     [Tags]  post
@@ -79,7 +79,6 @@ Put Request With No Data
     ${resp}=  Put Request  httpbin  /put
     Should Be Equal As Strings  ${resp.status_code}  200
 
-
 Post Request With No Dictionary
     [Tags]  post
     Create Session  httpbin  http://httpbin.org    debug=3
@@ -88,13 +87,12 @@ Post Request With No Dictionary
     Should Be Equal As Strings  ${resp.status_code}  200
     Should Contain  ${resp.content}  ${data}
 
-
 Put Request With URL Params
-	[Tags]  put
-	Create Session  httpbin  http://httpbin.org
-	&{params}=   Create Dictionary   key=value     key2=value2
-	${resp}=  Put Request  httpbin  /put  params=${params}
-	Should Be Equal As Strings  ${resp.status_code}  200
+    [Tags]  put
+    Create Session  httpbin  http://httpbin.org
+    &{params}=   Create Dictionary   key=value     key2=value2
+    ${resp}=  Put Request  httpbin  /put  params=${params}
+    Should Be Equal As Strings  ${resp.status_code}  200
 
 
 Put Request With No Dictionary
@@ -115,7 +113,6 @@ Post Requests
     Dictionary Should Contain Value  ${resp.json()['form']}  bulkan
     Dictionary Should Contain Value  ${resp.json()['form']}  evcimen
 
-
 Post With Unicode Data
     [Tags]  post
     Create Session  httpbin  http://httpbin.org    debug=3
@@ -123,7 +120,6 @@ Post With Unicode Data
     &{headers}=  Create Dictionary  Content-Type=application/x-www-form-urlencoded
     ${resp}=  Post Request  httpbin  /post  data=${data}  headers=${headers}
     Dictionary Should Contain Value  ${resp.json()['form']}  度假村
-
 
 Post Request With Unicode Data
     [Tags]  post
@@ -133,7 +129,6 @@ Post Request With Unicode Data
     ${resp}=  Post Request  httpbin  /post  data=${data}  headers=${headers}
     Dictionary Should Contain Value  ${resp.json()['form']}  度假村
 
-
 Post Request With Binary Data in Dictionary
     [Tags]  post
     Create Session  httpbin  http://httpbin.org    debug=3
@@ -141,9 +136,8 @@ Post Request With Binary Data in Dictionary
     &{data}=  Create Dictionary  name=${file_data.strip()}
     &{headers}=  Create Dictionary  Content-Type=application/x-www-form-urlencoded
     ${resp}=  Post Request  httpbin  /post  data=${data}  headers=${headers}
-	Log		${resp.json()['form']}
+    Log    ${resp.json()['form']}
     Should Contain  ${resp.json()['form']['name']}  \u5ea6\u5047\u6751
-
 
 Post Request With Binary Data
     [Tags]  post
@@ -152,7 +146,6 @@ Post Request With Binary Data
     &{headers}=  Create Dictionary  Content-Type=application/x-www-form-urlencoded
     ${resp}=  Post Request  httpbin  /post  data=${data}  headers=${headers}
     Should Contain  ${resp.json()['form'].keys()[0]}  度假村
-
 
 Post With File
     [Tags]  post
@@ -165,7 +158,6 @@ Post With File
     ${file}=  To Json  ${resp.json()['files']['file']}
     Dictionary Should Contain Key  ${file}  one
     Dictionary Should Contain Key  ${file}  two
-
 
 Post Request With File
     [Tags]  post
@@ -189,13 +181,11 @@ Put Requests
     Dictionary Should Contain Value  ${resp.json()['form']}  bulkan
     Dictionary Should Contain Value  ${resp.json()['form']}  evcimen
 
-
 Head Request
     [Tags]  head
     Create Session  httpbin  http://httpbin.org
     ${resp}=  Head Request  httpbin  /headers
     Should Be Equal As Strings  ${resp.status_code}  200
-
 
 Options Request
     [Tags]  options
@@ -204,7 +194,6 @@ Options Request
     Should Be Equal As Strings  ${resp.status_code}  200
     Dictionary Should Contain Key  ${resp.headers}  allow
 
-
 Delete Request With URL Params
 	[Tags]  delete
 	Create Session  httpbin  http://httpbin.org
@@ -212,13 +201,11 @@ Delete Request With URL Params
 	${resp}=  Delete Request  httpbin  /delete		${params}
 	Should Be Equal As Strings  ${resp.status_code}  200
 
-
 Delete Request With No Data
     [Tags]  delete
     Create Session  httpbin  http://httpbin.org
     ${resp}=  Delete Request  httpbin  /delete
     Should Be Equal As Strings  ${resp.status_code}  200
-
 
 Delete Request With Data
     [Tags]  delete
@@ -351,4 +338,3 @@ Set Pretty Print to non-Boolean value
     Should Contain    ${output}    "key_one": "true"
     Should Contain    ${output}    "key_two": "this is a test string"
     Should Not Contain    ${output}    {u'key_two': u'this is a test string', u'key_one': u'true'}
-	
