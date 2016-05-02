@@ -75,7 +75,9 @@ For individual keyword documentation see the following;
 [http://bulkan.github.io/robotframework-requests/](http://bulkan.github.io/robotframework-requests/)
 
 You can update the documentation once checked out by going to the top directory of this repo and issuing the following command:
+```bash
 python -m robot.libdoc src/RequestsLibrary/RequestsKeywords.py doc/RequestsLibrary.html
+```
 
 Help
 ====
